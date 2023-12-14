@@ -1,0 +1,36 @@
+* {
+  border: none;
+}
+.page {
+  margin: auto;
+  width: max-content;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  margin: 14px;
+}
+
+.edit {
+  text-decoration: none;
+  color: black;
+}
+
+.actions button {
+  width: 70px;
+}
+
+.image {
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.img {
+  max-height: 30vh;
+}
+
+.content {
+  width: 60vw;
+  height: max-content;
+}

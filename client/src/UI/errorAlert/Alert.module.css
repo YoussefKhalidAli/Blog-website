@@ -1,0 +1,13 @@
+.container {
+  border: 2px rgb(188, 118, 130) solid;
+  border-radius: 6px;
+  background-color: rgb(246, 175, 195);
+  color: black;
+  text-align: center;
+  line-height: 4vh;
+  width: 15%;
+  min-height: 5vh;
+  max-height: fit-content;
+  margin: auto;
+  margin-top: 10px;
+}

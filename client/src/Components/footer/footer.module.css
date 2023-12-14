@@ -1,0 +1,22 @@
+.container {
+  margin: auto;
+  width: fit-content;
+}
+
+.page {
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  margin: auto;
+  margin: 0px 5px;
+  padding: 0px 5px;
+}
+
+.skip {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}

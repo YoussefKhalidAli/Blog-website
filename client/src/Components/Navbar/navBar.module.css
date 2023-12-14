@@ -1,0 +1,28 @@
+.navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  margin: auto;
+  background-color: black;
+}
+
+.links {
+  display: flex;
+}
+
+.secondary {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: white;
+  margin: 0px 20px;
+}
+
+.mainLink {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
