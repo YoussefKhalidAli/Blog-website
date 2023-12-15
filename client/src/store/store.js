@@ -3,10 +3,11 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    info: "lol",
+    info: null,
     isLoggedIn: true,
     isAuthor: false,
     pageNumber: 1,
+    lastPage: null,
   },
   reducers: {
     login(state, action) {
@@ -25,6 +26,9 @@ const authSlice = createSlice({
     },
     setPageNumber(state, { payload }) {
       state.pageNumber = payload;
+    },
+    setLastPage(state, { payload }) {
+      state.lastPage = payload;
     },
   },
 });

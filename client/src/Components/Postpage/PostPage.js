@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Post from "../Post/post";
 import Footer from "../footer/footer";
+import { authActions } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function PostPage() {
   const [posts, setPosts] = useState([]);
+  const pageNumber = useSelector((state) => state.auth.pageNumber);
+  const dispatch = useDispatch();
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("/post/all", {
+    fetch(`/post/all?page=${pageNumber}`, {
       headers: { "x-auth-token": token },
     })
       .then((response) => response.json())
       .then((data) => {
-        setPosts(data);
+        setPosts(data[0]);
+        dispatch(authActions.setLastPage(Math.ceil(data[1] / 5)));
       });
-  }, []);
+  }, [dispatch, pageNumber]);
   return (
     <>
       {posts.length > 0 &&

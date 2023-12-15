@@ -88,8 +88,13 @@ router.get("/inner/:post_id", auth, async (req, res) => {
 
 router.get("/all", auth, async (req, res) => {
   try {
-    const posts = await Post.find().sort({ createdAt: "desc" });
-    res.json(posts);
+    const { page } = req.query;
+    const posts = await Post.find()
+      .sort({ createdAt: "desc" })
+      .skip(page * 5 - 5)
+      .limit(5);
+    const availablePosts = await Post.count();
+    res.json([posts, availablePosts]);
   } catch (err) {
     res.status(500).json(err.message);
   }

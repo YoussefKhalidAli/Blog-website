@@ -7,12 +7,20 @@ import { authActions } from "../../store/store";
 
 export default function Footer() {
   const pageNumber = useSelector((state) => state.auth.pageNumber);
+  const lastPage = useSelector((state) => state.auth.lastPage);
   const dispatch = useDispatch();
   const handlePageNumber = (e) => {
     console.log(parseInt(e.target.innerHTML));
+    dispatch(authActions.setPageNumber(parseInt(e.target.innerHTML)));
   };
-  let pageSelector = [null];
-  for (let i = pageNumber; i < pageNumber + 5; i++) {
+  const pageSelector = [];
+  const max =
+    pageNumber === 1 || pageNumber === 2 ? pageNumber + 5 : pageNumber + 3;
+  for (
+    let i = pageNumber === 1 || pageNumber === 2 ? pageNumber : pageNumber - 2;
+    i < max;
+    i++
+  ) {
     pageSelector[i - 1] = (
       <Link
         key={i + 1}
@@ -23,28 +31,28 @@ export default function Footer() {
         {i}
       </Link>
     );
+    console.log("out");
+    if (i === lastPage) {
+      console.log("in");
+      console.log(pageSelector);
+      break;
+    }
   }
 
-  const skipPages = () => {
-    dispatch(authActions.setPageNumber(pageSelector.length + 1));
+  const nextPage = () => {
+    dispatch(authActions.setPageNumber(pageNumber + 1));
   };
-  const returnPages = () => {
-    let page = 0;
-    if (pageSelector.length === 5) {
-      page = 1;
-    } else {
-      page = pageSelector.length - 9;
-    }
-    dispatch(authActions.setPageNumber(page));
+  const previousPage = () => {
+    dispatch(authActions.setPageNumber(pageNumber - 1));
   };
   return (
     <div className={classes.container}>
-      <Link to="?#" className={classes.skip} onClick={() => returnPages()}>
-        skip
+      <Link to="?#" className={classes.skip} onClick={() => previousPage()}>
+        back
       </Link>
       {pageSelector}
-      <Link to="?#" className={classes.skip} onClick={() => skipPages()}>
-        skip
+      <Link to="?#" className={classes.skip} onClick={() => nextPage()}>
+        next
       </Link>
     </div>
   );
