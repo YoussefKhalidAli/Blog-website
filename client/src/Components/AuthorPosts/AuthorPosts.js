@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Post from "../Post/post";
+
+//imported tools
 import { useParams } from "react-router";
+
+//imported components
+import Post from "../Post/post";
 
 export default function AuthorPosts({ token }) {
   const { author_id } = useParams();

@@ -1,5 +1,6 @@
 import classes from "../Login/Login.module.css";
 
+//imported tools
 import React, { useState } from "react";
 
 export default function Register() {
@@ -31,7 +32,6 @@ export default function Register() {
     });
 
     const data = await response.json();
-    console.log(data.token);
     localStorage.setItem("token", data.token);
 
     setPassword("");

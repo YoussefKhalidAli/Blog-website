@@ -1,10 +1,13 @@
 import classes from "./Login.module.css";
 
+//imported tools
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-
 import { authActions } from "../../store/store";
+
+//imported components
 import Alert from "../../UI/errorAlert/Alert";
+
 export default function Login() {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
@@ -35,7 +38,6 @@ export default function Login() {
       setPassword("");
       setUsername("");
     } else if (response.status === 400) {
-      console.log(`400 ${data}`);
       setErrors(data.erros);
       setTimeout(() => {
         setErrors([]);

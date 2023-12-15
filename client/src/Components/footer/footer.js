@@ -1,5 +1,6 @@
 import classes from "./footer.module.css";
 
+//imported tools
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -10,7 +11,6 @@ export default function Footer() {
   const lastPage = useSelector((state) => state.auth.lastPage);
   const dispatch = useDispatch();
   const handlePageNumber = (e) => {
-    console.log(parseInt(e.target.innerHTML));
     dispatch(authActions.setPageNumber(parseInt(e.target.innerHTML)));
   };
   const pageSelector = [];
@@ -31,10 +31,7 @@ export default function Footer() {
         {i}
       </Link>
     );
-    console.log("out");
     if (i === lastPage) {
-      console.log("in");
-      console.log(pageSelector);
       break;
     }
   }

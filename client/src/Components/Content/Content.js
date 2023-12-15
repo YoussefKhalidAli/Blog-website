@@ -1,5 +1,6 @@
 import classes from "./Content.module.css";
 
+//imported tools
 import React, { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import { useDispatch, useSelector } from "react-redux";

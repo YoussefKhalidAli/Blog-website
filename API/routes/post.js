@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
+
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 
-const SECRET = "sojifjosnfonidofhey";
-
 const Post = require("../../models/Posts");
+
 const auth = require("../middleWare/auth");
 
 const storage = multer.diskStorage({
@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
+// add a post
 router.post(
   "/",
   [
@@ -41,8 +41,7 @@ router.post(
     }
     const { title, summary, content } = req.body;
     const token = req.header("x-auth-token");
-    jwt.verify(token, SECRET, {}, async (err, info) => {
-      console.log(info);
+    jwt.verify(token, process.env.REACT_APP_SECRET, {}, async (err, info) => {
       try {
         const post = new Post({
           title,
@@ -63,6 +62,7 @@ router.post(
   }
 );
 
+// update  a post
 router.post("/:post_id", [auth, upload.single("image")], async (req, res) => {
   const { title, content, summary } = req.body;
   const image = req.file?.path;
@@ -77,6 +77,7 @@ router.post("/:post_id", [auth, upload.single("image")], async (req, res) => {
   }
 });
 
+// get post content
 router.get("/inner/:post_id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.post_id);
@@ -86,6 +87,7 @@ router.get("/inner/:post_id", auth, async (req, res) => {
   }
 });
 
+// 5 posts per page
 router.get("/all", auth, async (req, res) => {
   try {
     const { page } = req.query;
@@ -100,6 +102,7 @@ router.get("/all", auth, async (req, res) => {
   }
 });
 
+// get all post by author
 router.get("/:author_id", auth, async (req, res) => {
   try {
     const posts = await Post.find({ user: req.params.author_id }).sort({
@@ -111,6 +114,7 @@ router.get("/:author_id", auth, async (req, res) => {
   }
 });
 
+// delete post
 router.delete("/:post_id", auth, async (req, res) => {
   try {
     await Post.deleteOne({ _id: req.params.post_id });

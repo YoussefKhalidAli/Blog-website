@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
+
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const SECRET = "sojifjosnfonidofhey";
 
 const genToken = require("../../getToken");
 
 const User = require("../../models/User");
 
+// login request
 router.post(
   "/",
   [
@@ -48,9 +49,10 @@ router.post(
   }
 );
 
+//user validation
 router.post("/validate", (req, res) => {
   const { token } = req.headers;
-  jwt.verify(token, SECRET, {}, async (err, info) => {
+  jwt.verify(token, process.env.REACT_APP_SECRET, {}, async (err, info) => {
     if (err) {
       res.status(401).json(err);
     } else {

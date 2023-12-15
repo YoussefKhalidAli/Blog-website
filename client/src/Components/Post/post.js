@@ -1,8 +1,11 @@
 import classes from "./post.module.css";
+
+//imported tools
 import React from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+
 function Post({ title, summary, createdAt, username, user, _id, image }) {
   let path = String(image);
   path = path.split("\\")[1];

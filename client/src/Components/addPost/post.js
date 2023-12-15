@@ -1,6 +1,7 @@
 import classes from "./addPost.module.css";
 import "react-quill/dist/quill.snow.css";
 
+//imported tools
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import Alert from "../../UI/errorAlert/Alert";

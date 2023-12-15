@@ -1,8 +1,13 @@
+//imported tools
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+//imported components
 import Post from "../Post/post";
 import Footer from "../footer/footer";
+
+//redux
 import { authActions } from "../../store/store";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function PostPage() {
   const [posts, setPosts] = useState([]);
