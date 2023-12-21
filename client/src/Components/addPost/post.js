@@ -67,35 +67,36 @@ export default function AddPost() {
         onChange={(e) => setImage(e.target.files[0])}
       />
       <label>content</label>
-      <ReactQuill
-        name="content"
-        onChange={(e) => setContent(e)}
-        className={classes.content}
-        value={content}
-        modules={{
-          toolbar: [
-            [{ header: [] }, { font: [] }],
-            [{ size: [] }],
-            ["bold", "italic", "underline", "strike", "blockquote"],
-            [
-              { list: "ordered" },
-              { list: "bullet" },
-              { indent: "-1" },
-              { indent: "+1" },
+      <div className={classes.content}>
+        <ReactQuill
+          name="content"
+          style={{ height: "100%" }}
+          onChange={(e) => setContent(e)}
+          value={content}
+          modules={{
+            toolbar: [
+              [{ header: [] }, { font: [] }],
+              [{ size: [] }],
+              ["bold", "italic", "underline", "strike", "blockquote"],
+              [
+                { list: "ordered" },
+                { list: "bullet" },
+                { indent: "-1" },
+                { indent: "+1" },
+              ],
+              ["link", "image", "video"],
+              ["clean"],
+              [{ color: [] }, { background: [] }],
+              [
+                { align: "" },
+                { align: "center" },
+                { align: "right" },
+                { align: "justify" },
+              ],
             ],
-            ["link", "image", "video"],
-            ["clean"],
-            [{ color: [] }, { background: [] }],
-            [
-              { align: "" },
-              { align: "center" },
-              { align: "right" },
-              { align: "justify" },
-            ],
-          ],
-        }}
-      ></ReactQuill>
-      <br></br>
+          }}
+        ></ReactQuill>
+      </div>
       <button type="Submit">Post</button>
       {errors.length > 0 &&
         errors.map((error) => {

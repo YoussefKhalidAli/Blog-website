@@ -1,6 +1,6 @@
+const fs = require("fs");
 const express = require("express");
 const router = express.Router();
-
 const { check, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
@@ -9,6 +9,7 @@ const path = require("path");
 const Post = require("../../models/Posts");
 
 const auth = require("../middleWare/auth");
+const { stringify } = require("querystring");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -117,9 +118,19 @@ router.get("/:author_id", auth, async (req, res) => {
 // delete post
 router.delete("/:post_id", auth, async (req, res) => {
   try {
-    await Post.deleteOne({ _id: req.params.post_id });
+    const { image } = await Post.findOneAndDelete(
+      { _id: req.params.post_id },
+      { projection: { _id: 0, image: 1 } }
+    );
+    fs.unlink(`images/${image.split("\\")[1]}`, (err) => {
+      if (err) console.log("err:", err);
+      else {
+        console.log("\nDeleted file");
+      }
+    });
     res.status(200).json("deleted");
   } catch (err) {
+    console.log(err.message);
     res.status(500).json(err.message);
   }
 });
